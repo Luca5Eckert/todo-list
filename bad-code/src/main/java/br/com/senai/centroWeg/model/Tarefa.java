@@ -2,14 +2,32 @@ package br.com.senai.centroWeg.model;
 
 public class Tarefa {
 
+    private int id;
     private String nomeTarefa;
-    private StatusTarefa statusTarefas;
+    private StatusTarefa statusTarefa;
     private String descricao;
 
-    public Tarefa(String nomeTarefa, StatusTarefa statusTarefas, String descricao) {
+    public Tarefa(int id, String nomeTarefa, StatusTarefa statusTarefa, String descricao) {
+        this.id = id;
         this.nomeTarefa = nomeTarefa;
-        this.statusTarefas = statusTarefas;
+        this.statusTarefa = statusTarefa;
         this.descricao = descricao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public StatusTarefa getStatusTarefa() {
+        return statusTarefa;
+    }
+
+    public void setStatusTarefa(StatusTarefa statusTarefa) {
+        this.statusTarefa = statusTarefa;
     }
 
     public String getNomeTarefa() {
@@ -21,11 +39,11 @@ public class Tarefa {
     }
 
     public StatusTarefa getStatusTarefas() {
-        return statusTarefas;
+        return statusTarefa;
     }
 
     public void setStatusTarefas(StatusTarefa statusTarefas) {
-        this.statusTarefas = statusTarefas;
+        this.statusTarefa = statusTarefas;
     }
 
     public String getDescricao() {
@@ -34,5 +52,11 @@ public class Tarefa {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return "nomeTarefa: " + nomeTarefa + " status: " + statusTarefa +
+                "\ndescricao: " + descricao;
     }
 }
