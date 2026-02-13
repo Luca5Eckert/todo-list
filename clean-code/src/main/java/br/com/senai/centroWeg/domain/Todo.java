@@ -2,18 +2,28 @@ package br.com.senai.centroWeg.domain;
 
 public class Todo {
 
-    private final int id;
+    private int id;
 
     private String title;
 
     private String description;
 
+    private int authorId;
+
     private StatusTodo statusTodo;
 
-    public Todo(int id, String title, String description, StatusTodo statusTodo) {
+    public Todo(String title, String description, int authorId, StatusTodo statusTodo) {
+        this.title = title;
+        this.description = description;
+        this.authorId = authorId;
+        this.statusTodo = statusTodo;
+    }
+
+    public Todo(int id, String title, String description, int authorId, StatusTodo statusTodo) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.authorId = authorId;
         this.statusTodo = statusTodo;
     }
 
