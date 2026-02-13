@@ -27,6 +27,18 @@ public class Todo {
         this.statusTodo = statusTodo;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
+
     public StatusTodo getStatusTodo() {
         return statusTodo;
     }
