@@ -56,7 +56,9 @@ public class Tarefa {
 
     @Override
     public String toString() {
-        return "nomeTarefa: " + nomeTarefa + " status: " + statusTarefa +
-                "\ndescricao: " + descricao;
+        return "id: "+ id +
+                "\nnome Tarefa: " + nomeTarefa +
+                "\nstatus: " + statusTarefa +
+                "\nDescrição: " + descricao;
     }
 }
