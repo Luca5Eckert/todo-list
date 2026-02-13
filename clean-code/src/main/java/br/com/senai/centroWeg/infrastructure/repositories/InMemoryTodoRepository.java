@@ -1,6 +1,30 @@
 package br.com.senai.centroWeg.infrastructure.repositories;
 
+import br.com.senai.centroWeg.domain.Todo;
 import br.com.senai.centroWeg.repository.TodoRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 public class InMemoryTodoRepository implements TodoRepository {
+
+    @Override
+    public Todo save(Todo todo) {
+        return null;
+    }
+
+    @Override
+    public List<Todo> findAll() {
+        return List.of();
+    }
+
+    @Override
+    public Optional<Todo> findById() {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean existsByTitleAndAuthorId() {
+        return false;
+    }
 }

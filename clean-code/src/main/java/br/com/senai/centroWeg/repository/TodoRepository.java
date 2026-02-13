@@ -1,4 +1,16 @@
 package br.com.senai.centroWeg.repository;
 
+import br.com.senai.centroWeg.domain.Todo;
+
+import java.util.List;
+import java.util.Optional;
+
 public interface TodoRepository {
+
+    public Todo save(Todo todo);
+    public List<Todo> findAll();
+    public Optional<Todo> findById();
+
+    public boolean existsByTitleAndAuthorId();
+
 }
