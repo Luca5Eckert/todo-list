@@ -1,4 +1,4 @@
-package br.com.senai.centroWeg.domain.model;
+package br.com.senai.centroWeg.domain;
 
 public enum StatusTodo {
     PENDING,
