@@ -18,9 +18,13 @@ public class TarefaService {
         }
     }
 
-    public void excluirTarefa(){}
+    public void excluirTarefa(Tarefa tarefa){
+        tarefas.remove(tarefa);
+    }
 
-    public void criarTarefa(){}
+    public void criarTarefa(Tarefa tarefa){
+        tarefas.add(tarefa);
+    }
 
     public void verTarefas(){
         for(Tarefa tarefa : tarefas){
