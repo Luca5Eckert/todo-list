@@ -19,12 +19,12 @@ public class InMemoryTodoRepository implements TodoRepository {
     }
 
     @Override
-    public Optional<Todo> findById() {
+    public Optional<Todo> findById(int Id) {
         return Optional.empty();
     }
 
     @Override
-    public boolean existsByTitleAndAuthorId() {
+    public boolean existsByTitle(String title) {
         return false;
     }
 }
