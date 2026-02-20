@@ -3,8 +3,10 @@ package br.com.senai.centroWeg.module.streak.domain.service;
 import br.com.senai.centroWeg.module.streak.domain.command.StreakGetAllByUserIdCommand;
 import br.com.senai.centroWeg.module.streak.domain.command.StreakGetByIdCommand;
 import br.com.senai.centroWeg.module.streak.domain.command.StreakGetByUserIdCommand;
+import br.com.senai.centroWeg.module.streak.domain.command.StreakGetStreakAnalyticsByUserId;
 import br.com.senai.centroWeg.module.streak.domain.exception.StreakException;
 import br.com.senai.centroWeg.module.streak.domain.model.Streak;
+import br.com.senai.centroWeg.module.streak.domain.model.StreakAnalytics;
 import br.com.senai.centroWeg.module.streak.domain.repository.StreakRepository;
 
 import java.util.List;
@@ -30,4 +32,10 @@ public class StreakService {
     public List<Streak> getAllStreakByUserId(StreakGetAllByUserIdCommand command) {
         return streakRepository.findALlByUserId(command.userId());
     }
+
+    public StreakAnalytics getStreakAnalyticsByUserId(StreakGetStreakAnalyticsByUserId command) {
+        return streakRepository.findAnalyticsByUserId(command.userId())
+                .orElseThrow(() -> new StreakException("Streak analytics not found for user"));
+    }
+
 }
