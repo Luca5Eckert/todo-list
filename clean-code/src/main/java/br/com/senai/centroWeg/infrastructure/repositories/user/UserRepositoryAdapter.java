@@ -1,7 +1,7 @@
 package br.com.senai.centroWeg.infrastructure.repositories.user;
 
-import br.com.senai.centroWeg.module.user.model.User;
-import br.com.senai.centroWeg.module.user.repository.UserRepository;
+import br.com.senai.centroWeg.module.user.domain.model.User;
+import br.com.senai.centroWeg.module.user.domain.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

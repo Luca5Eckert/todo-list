@@ -1,7 +1,7 @@
 package br.com.senai.centroWeg.infrastructure.repositories.todo;
 
-import br.com.senai.centroWeg.module.todo.model.Todo;
-import br.com.senai.centroWeg.module.todo.repository.TodoRepository;
+import br.com.senai.centroWeg.module.todo.domain.model.Todo;
+import br.com.senai.centroWeg.module.todo.domain.repository.TodoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
