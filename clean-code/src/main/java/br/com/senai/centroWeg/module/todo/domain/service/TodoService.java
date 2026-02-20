@@ -1,8 +1,8 @@
-package br.com.senai.centroWeg.module.todo.service;
+package br.com.senai.centroWeg.module.todo.domain.service;
 
-import br.com.senai.centroWeg.module.todo.model.Todo;
-import br.com.senai.centroWeg.module.todo.dto.TodoUpdateRequest;
-import br.com.senai.centroWeg.module.todo.repository.TodoRepository;
+import br.com.senai.centroWeg.module.todo.application.dto.TodoUpdateRequest;
+import br.com.senai.centroWeg.module.todo.domain.model.Todo;
+import br.com.senai.centroWeg.module.todo.domain.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
