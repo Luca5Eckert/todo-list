@@ -1,7 +1,7 @@
 package br.com.senai.centroWeg.infrastructure.repositories.streak;
 
-import br.com.senai.centroWeg.module.streak.model.Streak;
-import br.com.senai.centroWeg.module.streak.repository.StreakRepository;
+import br.com.senai.centroWeg.module.streak.domain.model.Streak;
+import br.com.senai.centroWeg.module.streak.domain.repository.StreakRepository;
 
 import java.util.List;
 import java.util.Optional;
