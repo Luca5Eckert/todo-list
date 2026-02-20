@@ -1,12 +1,14 @@
-package br.com.senai.centroWeg.infrastructure.repositories;
+package br.com.senai.centroWeg.infrastructure.repositories.todo;
 
 import br.com.senai.centroWeg.module.todo.model.Todo;
 import br.com.senai.centroWeg.module.todo.repository.TodoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-public class InMemoryTodoRepository implements TodoRepository {
+@Repository
+public class TodoRepositoryAdapter implements TodoRepository {
 
     @Override
     public Todo save(Todo todo) {
