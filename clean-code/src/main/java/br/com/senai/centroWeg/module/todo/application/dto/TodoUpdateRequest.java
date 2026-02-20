@@ -11,7 +11,7 @@ public record TodoUpdateRequest(
 
     public TodoUpdateRequest {
         if(title.isBlank()) {
-            throw new RuntimeException("Não pode ficar em branco");
+            throw new RuntimeException("O titulo deve ser preenchido");
         }
     }
 

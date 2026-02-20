@@ -1,15 +1,26 @@
 package br.com.senai.centroWeg.module.todo.domain.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 public class Todo {
 
+    @Id
+    @GeneratedValue
     private int id;
 
+    @Column
     private String title;
 
+    @Column
     private String description;
 
+    @Column
     private int authorId;
 
+    @Column
     private StatusTodo statusTodo;
 
     public Todo(String title, String description, int authorId, StatusTodo statusTodo) {
