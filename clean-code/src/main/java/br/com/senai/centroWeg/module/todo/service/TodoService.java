@@ -1,8 +1,8 @@
-package br.com.senai.centroWeg.service;
+package br.com.senai.centroWeg.module.todo.service;
 
-import br.com.senai.centroWeg.domain.Todo;
-import br.com.senai.centroWeg.dto.TodoCreateRequest;
-import br.com.senai.centroWeg.repository.TodoRepository;
+import br.com.senai.centroWeg.module.todo.model.Todo;
+import br.com.senai.centroWeg.module.todo.dto.TodoUpdateRequest;
+import br.com.senai.centroWeg.module.todo.repository.TodoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +15,7 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
-    public void create (TodoCreateRequest request){
-
+    public void create (TodoUpdateRequest request){
         if(todoRepository.existsByTitle(request.title())){
             throw new RuntimeException("Já exite um item com este titulo");
         }
@@ -31,7 +30,12 @@ public class TodoService {
         todoRepository.save(todo);
     }
 
-    public List<Todo> list (){
+    public void update(int todoId, TodoUpdateRequest request){
+
+    }
+
+
+    public List<Todo> findAll(){
         return todoRepository.findAll();
     }
 

@@ -1,15 +1,15 @@
-package br.com.senai.centroWeg.dto;
+package br.com.senai.centroWeg.module.todo.dto;
 
-import br.com.senai.centroWeg.domain.StatusTodo;
+import br.com.senai.centroWeg.module.todo.model.StatusTodo;
 
-public record TodoCreateRequest(
+public record TodoUpdateRequest(
         String title,
         String Description,
         int authorId,
         StatusTodo statusTodo
 ) {
 
-    public TodoCreateRequest {
+    public TodoUpdateRequest {
         if(title.isBlank()) {
             throw new RuntimeException("Não pode ficar em branco");
         }
