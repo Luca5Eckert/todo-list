@@ -1,13 +1,13 @@
 package br.com.senai.centroWeg.module.todo.application.controller;
 
-import br.com.senai.centroWeg.module.todo.dto.TodoCreateRequest;
-import br.com.senai.centroWeg.module.todo.dto.TodoUpdateRequest;
-import br.com.senai.centroWeg.module.todo.model.Todo;
-import br.com.senai.centroWeg.module.todo.repository.TodoRepository;
-import br.com.senai.centroWeg.module.todo.service.TodoService;
+import br.com.senai.centroWeg.module.todo.application.dto.TodoUpdateRequest;
+import br.com.senai.centroWeg.module.todo.domain.model.Todo;
+import br.com.senai.centroWeg.module.todo.domain.service.TodoService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/todos")
