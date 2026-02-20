@@ -1,4 +1,4 @@
-package br.com.senai.centroWeg.domain;
+package br.com.senai.centroWeg.module.todo.model;
 
 public class Todo {
 

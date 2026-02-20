@@ -1,6 +1,6 @@
-package br.com.senai.centroWeg.repository;
+package br.com.senai.centroWeg.module.todo.repository;
 
-import br.com.senai.centroWeg.domain.Todo;
+import br.com.senai.centroWeg.module.todo.model.Todo;
 
 import java.util.List;
 import java.util.Optional;
