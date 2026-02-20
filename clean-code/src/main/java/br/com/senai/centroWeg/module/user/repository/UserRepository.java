@@ -1,5 +1,7 @@
 package br.com.senai.centroWeg.module.user.repository;
 
+import br.com.senai.centroWeg.module.user.model.User;
+
 import java.util.List;
 import java.util.Optional;
 
