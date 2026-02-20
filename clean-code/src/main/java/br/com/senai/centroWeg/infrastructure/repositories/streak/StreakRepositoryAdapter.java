@@ -21,4 +21,14 @@ public class StreakRepositoryAdapter implements StreakRepository {
     public Optional<Streak> findById(int Id) {
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Streak> findActiveByUserId(int i) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Streak> findALlByUserId(int i) {
+        return List.of();
+    }
 }
