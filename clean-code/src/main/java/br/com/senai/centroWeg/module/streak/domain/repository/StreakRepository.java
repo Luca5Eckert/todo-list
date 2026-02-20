@@ -8,7 +8,12 @@ import java.util.Optional;
 public interface StreakRepository {
 
     Streak save(Streak todo);
+
     List<Streak> findAll();
+
     Optional<Streak> findById(int Id);
 
+    Optional<Streak> findActiveByUserId(int i);
+
+    List<Streak> findALlByUserId(int i);
 }
