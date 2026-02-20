@@ -24,5 +24,4 @@ public class TodoController {
         return service.create(request);
     }
 
-
 }
