@@ -1,11 +1,18 @@
 package br.com.senai.centroWeg.module.user.domain.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false,unique = true)
     private String email;
 
     public User(int id, String name, String email) {
@@ -13,6 +20,15 @@ public class User {
         this.name = name;
         this.email = email;
     }
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    public User() {
+    }
+
 
     public int getId() {
         return id;
