@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,8 +15,8 @@ public interface JpaStreakRepository extends JpaRepository<Streak, Integer> {
 
     List<Streak> findAllByUserId(int userId);
 
-    @Query("SELECT s FROM Streak s WHERE s.userId = :userId AND s.last >= CURRENT_DATE - 1")
-    Optional<Streak> findActiveByUserId(int userId);
+    @Query("SELECT s FROM Streak s WHERE s.userId = :userId AND s.last >= :yesterday")
+    Optional<Streak> findActiveByUserId(int userId, LocalDate yesterday);
 
     @Query("""
         SELECT

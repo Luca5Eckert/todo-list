@@ -9,6 +9,7 @@ import br.com.senai.centroWeg.module.streak.domain.model.StreakAnalytics;
 import br.com.senai.centroWeg.module.streak.domain.repository.StreakRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -26,7 +27,9 @@ public class StreakService {
     }
 
     public Streak getActiveByUserId(GetStreaksByUserQuery query) {
-        return repository.findActiveByUserId(query.userId())
+        var yesterday = LocalDate.now().minusDays(1);
+
+        return repository.findActiveByUserId(query.userId(), yesterday)
                 .orElseThrow(() -> new StreakNotFoundException("Active streak not found."));
     }
 

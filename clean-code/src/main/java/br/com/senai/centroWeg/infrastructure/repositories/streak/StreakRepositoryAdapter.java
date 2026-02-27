@@ -3,10 +3,13 @@ package br.com.senai.centroWeg.infrastructure.repositories.streak;
 import br.com.senai.centroWeg.module.streak.domain.model.Streak;
 import br.com.senai.centroWeg.module.streak.domain.model.StreakAnalytics;
 import br.com.senai.centroWeg.module.streak.domain.repository.StreakRepository;
+import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class StreakRepositoryAdapter implements StreakRepository {
    
     private final JpaStreakRepository jpaStreakRepository;
@@ -31,8 +34,8 @@ public class StreakRepositoryAdapter implements StreakRepository {
     }
 
     @Override
-    public Optional<Streak> findActiveByUserId(int userId) {
-        return jpaStreakRepository.findActiveByUserId(userId);
+    public Optional<Streak> findActiveByUserId(int userId, LocalDate yesterday) {
+        return jpaStreakRepository.findActiveByUserId(userId, yesterday);
     }
 
     @Override

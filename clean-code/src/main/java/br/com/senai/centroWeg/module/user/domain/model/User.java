@@ -3,6 +3,7 @@ package br.com.senai.centroWeg.module.user.domain.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id

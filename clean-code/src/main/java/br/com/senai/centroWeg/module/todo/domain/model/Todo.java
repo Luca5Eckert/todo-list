@@ -1,10 +1,8 @@
 package br.com.senai.centroWeg.module.todo.domain.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
 public class Todo {
 
     @Id
