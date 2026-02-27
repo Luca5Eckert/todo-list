@@ -16,7 +16,7 @@ public interface StreakRepository {
 
     Optional<Streak> findActiveByUserId(int userId);
 
-    List<Streak> findALlByUserId(int userId);
+    List<Streak> findAllByUserId(int userId);
 
     Optional<StreakAnalytics> findAnalyticsByUserId(int userId);
 }
