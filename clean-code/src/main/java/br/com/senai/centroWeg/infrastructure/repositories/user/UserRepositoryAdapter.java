@@ -20,7 +20,12 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public User findById(int Id) {
+    public Optional<User> findById(int Id) {
+        return null;
+    }
+
+    @Override
+    public User save(int id, User user){
         return null;
     }
 
