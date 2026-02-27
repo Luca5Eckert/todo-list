@@ -45,5 +45,11 @@ public class TodoController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping
+    public void deleteByTodoId(int userId){
+
+        var query = GetTodoByUserQuery.of(userId);
+        service.deleteById(query);
+    }
 
 }

@@ -14,4 +14,6 @@ public interface TodoRepository {
     public boolean existsByTitle(String title);
 
     List<Todo> findAllByUserId(int useId);
+
+    void deleteById(int i);
 }
