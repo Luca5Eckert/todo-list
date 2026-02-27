@@ -1,0 +1,34 @@
+package br.com.senai.centroWeg.infrastructure.repositories.user;
+
+import br.com.senai.centroWeg.module.user.domain.model.User;
+import br.com.senai.centroWeg.module.user.domain.repository.UserRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public class UserRepositoryAdapter implements UserRepository {
+    @Override
+    public User save(User todo) {
+        return null;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return List.of();
+    }
+
+    @Override
+    public Optional<User> findById(int Id) {
+        return null;
+    }
+
+    @Override
+    public User save(int id, User user){
+        return null;
+    }
+
+    @Override
+    public void delete(int id){}
+}
