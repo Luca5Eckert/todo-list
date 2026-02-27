@@ -1,11 +1,14 @@
 package br.com.senai.centroWeg.module.todo.application.controller;
 
+import br.com.senai.centroWeg.module.todo.application.dto.TodoCreateRequest;
 import br.com.senai.centroWeg.module.todo.application.dto.TodoResponse;
+import br.com.senai.centroWeg.module.todo.domain.command.TodoCreateCommand;
 import br.com.senai.centroWeg.module.todo.domain.query.GetTodoByIdQuery;
 import br.com.senai.centroWeg.module.todo.application.mapper.TodoMapper;
 import br.com.senai.centroWeg.module.todo.domain.query.GetTodoByUserQuery;
 import br.com.senai.centroWeg.module.todo.domain.service.TodoService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +24,15 @@ public class TodoController {
     public TodoController(TodoService service, TodoMapper mapper) {
         this.service = service;
         this.mapper = mapper;
+    }
+
+    @PostMapping
+    public ResponseEntity<TodoResponse> create (@RequestBody TodoCreateRequest request){
+        var command = TodoCreateCommand.of(request);
+        var todo = service.create(command);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(mapper.toResponse(todo));
     }
 
     @GetMapping("/{id}")
@@ -47,7 +59,6 @@ public class TodoController {
 
     @DeleteMapping
     public void deleteByTodoId(int userId){
-
         var query = GetTodoByUserQuery.of(userId);
         service.deleteById(query);
     }

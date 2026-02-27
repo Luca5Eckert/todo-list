@@ -4,7 +4,7 @@ import br.com.senai.centroWeg.module.todo.domain.model.StatusTodo;
 
 public record TodoCreateRequest(
         String title,
-        String Description,
+        String description,
         int authorId,
         StatusTodo statusTodo
 ) {

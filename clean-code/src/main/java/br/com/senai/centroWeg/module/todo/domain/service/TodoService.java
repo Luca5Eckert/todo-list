@@ -2,6 +2,7 @@ package br.com.senai.centroWeg.module.todo.domain.service;
 
 import br.com.senai.centroWeg.module.todo.application.dto.TodoCreateRequest;
 import br.com.senai.centroWeg.module.todo.application.dto.TodoUpdateRequest;
+import br.com.senai.centroWeg.module.todo.domain.command.TodoCreateCommand;
 import br.com.senai.centroWeg.module.todo.domain.exception.TodoNotFoundException;
 import br.com.senai.centroWeg.module.todo.domain.model.Todo;
 import br.com.senai.centroWeg.module.todo.domain.query.GetTodoByIdQuery;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -23,19 +23,18 @@ public class TodoService {
         this.todoRepository = todoRepository;
     }
 
-    public Todo create (TodoCreateRequest request){
+    public Todo create (TodoCreateCommand command){
 
-        //Valida se o titulo é unico
-        if(todoRepository.existsByTitle(request.title())){
+        if(todoRepository.existsByTitle(command.title())){
             throw new RuntimeException("Já exite um item com este titulo");
         }
 
         //Converte o request em entidade
         Todo todo = new Todo(
-                request.title(),
-                request.Description(),
-                request.authorId(),
-                request.statusTodo()
+                command.title(),
+                command.description(),
+                command.authorId(),
+                command.statusTodo()
         );
 
         todoRepository.save(todo);
