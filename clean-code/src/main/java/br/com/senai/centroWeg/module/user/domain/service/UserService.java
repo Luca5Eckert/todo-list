@@ -15,8 +15,9 @@ public class UserService {
     }
 
     public User create(UserCreateCommand command) {
-        // Logic to create a user
-        return null; // return the created user
+        return userRepository.save(new User(command.name(), command.email())); // return the created user
     }
+
+    public
 
 }

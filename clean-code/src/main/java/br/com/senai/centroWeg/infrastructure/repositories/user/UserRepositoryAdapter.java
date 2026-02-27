@@ -20,7 +20,10 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public Optional<User> findById(int Id) {
-        return Optional.empty();
+    public User findById(int Id) {
+        return null;
     }
+
+    @Override
+    public void delete(int id){}
 }
