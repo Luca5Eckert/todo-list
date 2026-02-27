@@ -1,5 +1,6 @@
 package br.com.senai.centroWeg.module.todo.domain.model;
 
+import br.com.senai.centroWeg.module.todo.domain.exception.TodoAlreadyCompletedException;
 import jakarta.persistence.*;
 
 @Entity
@@ -76,4 +77,14 @@ public class Todo {
         return id;
     }
 
+    public void changeStatus(StatusTodo status) {
+        if(this.statusTodo == StatusTodo.COMPLETED){
+            throw new TodoAlreadyCompletedException();
+        }
+        this.statusTodo = status;
+    }
+
+    public boolean isCompleted() {
+        return this.statusTodo == StatusTodo.COMPLETED;
+    }
 }

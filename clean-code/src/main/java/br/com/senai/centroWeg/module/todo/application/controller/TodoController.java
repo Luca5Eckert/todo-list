@@ -2,12 +2,15 @@ package br.com.senai.centroWeg.module.todo.application.controller;
 
 import br.com.senai.centroWeg.module.todo.application.dto.TodoCreateRequest;
 import br.com.senai.centroWeg.module.todo.application.dto.TodoResponse;
+import br.com.senai.centroWeg.module.todo.application.dto.UpdateTodoRequest;
 import br.com.senai.centroWeg.module.todo.domain.command.TodoCreateCommand;
+import br.com.senai.centroWeg.module.todo.domain.command.UpdateTodoCommand;
 import br.com.senai.centroWeg.module.todo.domain.query.GetTodoByIdQuery;
 import br.com.senai.centroWeg.module.todo.application.mapper.TodoMapper;
 import br.com.senai.centroWeg.module.todo.domain.query.GetTodoByUserQuery;
 import br.com.senai.centroWeg.module.todo.domain.service.TodoService;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -62,5 +65,17 @@ public class TodoController {
         var query = GetTodoByUserQuery.of(userId);
         service.deleteById(query);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(
+            @PathVariable int id,
+            @RequestBody @Valid UpdateTodoRequest request
+    ){
+        var command = UpdateTodoCommand.of(id, request.statusTodo(), request.userId());
+        service.update(command);
+
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

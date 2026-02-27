@@ -1,14 +1,13 @@
 package br.com.senai.centroWeg.module.todo.domain.service;
 
-import br.com.senai.centroWeg.module.todo.application.dto.TodoCreateRequest;
-import br.com.senai.centroWeg.module.todo.application.dto.TodoUpdateRequest;
 import br.com.senai.centroWeg.module.todo.domain.command.TodoCreateCommand;
+import br.com.senai.centroWeg.module.todo.domain.command.UpdateTodoCommand;
 import br.com.senai.centroWeg.module.todo.domain.exception.TodoNotFoundException;
 import br.com.senai.centroWeg.module.todo.domain.model.Todo;
+import br.com.senai.centroWeg.module.todo.domain.port.StreakUpdater;
 import br.com.senai.centroWeg.module.todo.domain.query.GetTodoByIdQuery;
 import br.com.senai.centroWeg.module.todo.domain.query.GetTodoByUserQuery;
 import br.com.senai.centroWeg.module.todo.domain.repository.TodoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,20 +15,20 @@ import java.util.List;
 @Service
 public class TodoService {
 
-    @Autowired
     private final TodoRepository todoRepository;
+    private final StreakUpdater streakUpdater;
 
-    public TodoService(TodoRepository todoRepository) {
+    public TodoService(TodoRepository todoRepository, StreakUpdater streakUpdater) {
         this.todoRepository = todoRepository;
+        this.streakUpdater = streakUpdater;
     }
 
     public Todo create (TodoCreateCommand command){
 
         if(todoRepository.existsByTitle(command.title())){
-            throw new RuntimeException("Já exite um item com este titulo");
+            throw new RuntimeException("Already exists a todo with this title");
         }
 
-        //Converte o request em entidade
         Todo todo = new Todo(
                 command.title(),
                 command.description(),
@@ -41,8 +40,14 @@ public class TodoService {
         return todo;
     }
 
-    public void update(int todoId, TodoUpdateRequest request){
+    public void update(UpdateTodoCommand command){
+        Todo todo = todoRepository.findById(command.todoId())
+                .orElseThrow(() -> new RuntimeException("Todo not found"));
 
+        todo.changeStatus(command.status());
+        todoRepository.save(todo);
+
+        if (todo.isCompleted()) streakUpdater.update(command.userId());;
     }
 
 

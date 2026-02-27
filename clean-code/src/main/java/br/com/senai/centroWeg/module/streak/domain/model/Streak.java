@@ -26,4 +26,15 @@ public class Streak {
 
     private LocalDate last;
 
+    public void increment() {
+        LocalDate today = LocalDate.now();
+
+        if(this.last.equals(today)) {
+            return;
+        }
+
+        this.days++;
+        this.last = today;
+    }
+
 }
