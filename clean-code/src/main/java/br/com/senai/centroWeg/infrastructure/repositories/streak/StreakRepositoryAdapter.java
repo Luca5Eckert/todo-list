@@ -36,7 +36,7 @@ public class StreakRepositoryAdapter implements StreakRepository {
     }
 
     @Override
-    public List<Streak> findALlByUserId(int userId) {
+    public List<Streak> findAllByUserId(int userId) {
         return jpaStreakRepository.findAllByUserId(userId);
     }
 

@@ -1,41 +1,42 @@
 package br.com.senai.centroWeg.module.streak.domain.service;
 
-import br.com.senai.centroWeg.module.streak.domain.command.StreakGetAllByUserIdCommand;
-import br.com.senai.centroWeg.module.streak.domain.command.StreakGetByIdCommand;
-import br.com.senai.centroWeg.module.streak.domain.command.StreakGetByUserIdCommand;
-import br.com.senai.centroWeg.module.streak.domain.command.StreakGetStreakAnalyticsByUserId;
-import br.com.senai.centroWeg.module.streak.domain.exception.StreakException;
+import br.com.senai.centroWeg.module.streak.domain.query.GetStreaksByUserQuery;
+import br.com.senai.centroWeg.module.streak.domain.query.GetStreakByIdQuery;
+import br.com.senai.centroWeg.module.streak.domain.query.GetStreakAnalyticsQuery;
+import br.com.senai.centroWeg.module.streak.domain.exception.StreakNotFoundException;
 import br.com.senai.centroWeg.module.streak.domain.model.Streak;
 import br.com.senai.centroWeg.module.streak.domain.model.StreakAnalytics;
 import br.com.senai.centroWeg.module.streak.domain.repository.StreakRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StreakService {
 
-    private final StreakRepository streakRepository;
+    private final StreakRepository repository;
 
-    public StreakService(StreakRepository streakRepository) {
-        this.streakRepository = streakRepository;
+    public StreakService(StreakRepository repository) {
+        this.repository = repository;
     }
 
-    public Streak getById(StreakGetByIdCommand command) {
-        return streakRepository.findById(command.streakId())
-                .orElseThrow(() -> new StreakException("Streak not found"));
+    public Streak getById(GetStreakByIdQuery query) {
+        return repository.findById(query.id())
+                .orElseThrow(() -> new StreakNotFoundException(query.id()));
     }
 
-    public Streak getByActiveByUserId(StreakGetByUserIdCommand command) {
-        return streakRepository.findActiveByUserId(command.userId())
-                .orElseThrow(() -> new StreakException("Active streak not found for user"));
+    public Streak getActiveByUserId(GetStreaksByUserQuery query) {
+        return repository.findActiveByUserId(query.userId())
+                .orElseThrow(() -> new StreakNotFoundException("Active streak not found."));
     }
 
-    public List<Streak> getAllStreakByUserId(StreakGetAllByUserIdCommand command) {
-        return streakRepository.findALlByUserId(command.userId());
+    public List<Streak> getAllByUserId(GetStreaksByUserQuery query) {
+        return repository.findAllByUserId(query.userId());
     }
 
-    public StreakAnalytics getStreakAnalyticsByUserId(StreakGetStreakAnalyticsByUserId command) {
-        return streakRepository.findAnalyticsByUserId(command.userId())
-                .orElseThrow(() -> new StreakException("Streak analytics not found for user"));
+    public StreakAnalytics getAnalyticsByUserId(GetStreakAnalyticsQuery query) {
+        return repository.findAnalyticsByUserId(query.userId())
+                .orElseThrow(() -> new StreakNotFoundException("Streak analytics not found."));
     }
 
 }
