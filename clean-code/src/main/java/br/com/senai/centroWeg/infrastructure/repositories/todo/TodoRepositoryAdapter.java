@@ -29,4 +29,14 @@ public class TodoRepositoryAdapter implements TodoRepository {
     public boolean existsByTitle(String title) {
         return false;
     }
+
+    @Override
+    public List<Todo> findAllByUserId(int useId) {
+        return List.of();
+    }
+
+    @Override
+    public void deleteById(int i) {
+
+    }
 }
