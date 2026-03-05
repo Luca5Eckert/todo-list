@@ -25,7 +25,7 @@ public class StreakController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StreakResponse> getById(@PathVariable int id) {
+    public ResponseEntity<StreakResponse> getById(@PathVariable("id") int id) {
         var query  = GetStreakByIdQuery.of(id);
         var streak = service.getById(query);
 
@@ -33,7 +33,7 @@ public class StreakController {
     }
 
     @GetMapping("/users/{userId}/active")
-    public ResponseEntity<StreakResponse> getActiveByUserId(@PathVariable int userId) {
+    public ResponseEntity<StreakResponse> getActiveByUserId(@PathVariable("userId") int userId) {
         var query  = GetStreaksByUserQuery.of(userId);
         var streak = service.getActiveByUserId(query);
 
@@ -41,7 +41,7 @@ public class StreakController {
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<List<StreakResponse>> getAllByUserId(@PathVariable int userId) {
+    public ResponseEntity<List<StreakResponse>> getAllByUserId(@PathVariable("userId") int userId) {
         var query   = GetStreaksByUserQuery.of(userId);
         var streaks = service.getAllByUserId(query);
 
@@ -53,7 +53,7 @@ public class StreakController {
     }
 
     @GetMapping("/users/{userId}/analytics")
-    public ResponseEntity<StreakAnalyticsResponse> getAnalytics(@PathVariable int userId) {
+    public ResponseEntity<StreakAnalyticsResponse> getAnalytics(@PathVariable("userId") int userId) {
         var query     = GetStreakAnalyticsQuery.of(userId);
         var analytics = service.getAnalyticsByUserId(query);
 

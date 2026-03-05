@@ -30,7 +30,7 @@ public class TodoController {
     }
 
     @PostMapping
-    public ResponseEntity<TodoResponse> create (@RequestBody TodoCreateRequest request){
+    public ResponseEntity<TodoResponse> create(@RequestBody @Valid TodoCreateRequest request){
         var command = TodoCreateCommand.of(request);
         var todo = service.create(command);
         return ResponseEntity
@@ -39,7 +39,7 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TodoResponse> getById(@PathVariable int id) {
+    public ResponseEntity<TodoResponse> getById(@PathVariable("id") int id) {
         var query  = GetTodoByIdQuery.of(id);
         var todo = service.findById(query);
 
@@ -48,7 +48,7 @@ public class TodoController {
 
     @GetMapping("/users/{userId}")
     public ResponseEntity<List<TodoResponse>> getAllByUserId(
-            @PathVariable int userId
+            @PathVariable("userId") int userId
     ){
         var query = GetTodoByUserQuery.of(userId);
         var todolist = service.getAllByUserId(query);
@@ -60,15 +60,15 @@ public class TodoController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping()
-    public void deleteByTodoId(@PathVariable(name = ("id")) int userId){
-        var query = GetTodoByUserQuery.of(userId);
-        service.deleteById(query);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteByTodoId(@PathVariable("id") int id){
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(
-            @PathVariable int id,
+            @PathVariable("id") int id,
             @RequestBody @Valid UpdateTodoRequest request
     ){
         var command = UpdateTodoCommand.of(id, request.statusTodo(), request.userId());

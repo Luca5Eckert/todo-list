@@ -10,33 +10,39 @@ import java.util.Optional;
 @Repository
 public class TodoRepositoryAdapter implements TodoRepository {
 
+    private final JpaTodoRepository jpaTodoRepository;
+
+    public TodoRepositoryAdapter(JpaTodoRepository jpaTodoRepository) {
+        this.jpaTodoRepository = jpaTodoRepository;
+    }
+
     @Override
     public Todo save(Todo todo) {
-        return null;
+        return jpaTodoRepository.save(todo);
     }
 
     @Override
     public List<Todo> findAll() {
-        return List.of();
+        return jpaTodoRepository.findAll();
     }
 
     @Override
-    public Optional<Todo> findById(int Id) {
-        return Optional.empty();
+    public Optional<Todo> findById(int id) {
+        return jpaTodoRepository.findById(id);
     }
 
     @Override
     public boolean existsByTitle(String title) {
-        return false;
+        return jpaTodoRepository.existsByTitle(title);
     }
 
     @Override
-    public List<Todo> findAllByUserId(int useId) {
-        return List.of();
+    public List<Todo> findAllByUserId(int userId) {
+        return jpaTodoRepository.findAllByAuthorId(userId);
     }
 
     @Override
-    public void deleteById(int i) {
-
+    public void deleteById(int id) {
+        jpaTodoRepository.deleteById(id);
     }
 }
