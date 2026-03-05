@@ -17,7 +17,7 @@ public interface JpaStreakRepository extends JpaRepository<Streak, Integer> {
     List<Streak> findAllByUserId(int userId);
 
     @Query("SELECT s FROM Streak s WHERE s.userId = :userId AND s.last >= :yesterday")
-    Optional<Streak> findActiveByUserId(int userId, LocalDate yesterday);
+    Optional<Streak> findActiveByUserId(@Param("userId") int userId, @Param("yesterday") LocalDate yesterday);
 
     @Query("""
                 SELECT new br.com.senai.centroWeg.module.streak.domain.model.StreakAnalytics(
@@ -33,7 +33,7 @@ public interface JpaStreakRepository extends JpaRepository<Streak, Integer> {
                 WHERE s.userId = :userId
                 GROUP BY currentS.id, longestS.id
             """)
-    Optional<StreakAnalytics> findAnalyticsByUserId(int userId);
+    Optional<StreakAnalytics> findAnalyticsByUserId(@Param("userId") int userId);
 
 
 }
