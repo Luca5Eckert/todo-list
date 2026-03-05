@@ -22,17 +22,18 @@ public interface JpaStreakRepository extends JpaRepository<Streak, Integer> {
     @Query("""
                 SELECT new br.com.senai.centroWeg.module.streak.domain.model.StreakAnalytics(
                     AVG(s.days),
-                    (SELECT s_curr FROM Streak s_curr 
-                     WHERE s_curr.userId = :userId 
-                     ORDER BY s_curr.last DESC, s_curr.id DESC LIMIT 1),
-                    (SELECT s_long FROM Streak s_long 
-                     WHERE s_long.userId = :userId 
-                     ORDER BY s_long.days DESC, s_long.id DESC LIMIT 1)
+                    currentS,
+                    longestS
                 )
                 FROM Streak s
+                LEFT JOIN Streak currentS ON currentS.userId = :userId 
+                    AND currentS.last = (SELECT MAX(inner1.last) FROM Streak inner1 WHERE inner1.userId = :userId)
+                LEFT JOIN Streak longestS ON longestS.userId = :userId 
+                    AND longestS.days = (SELECT MAX(inner2.days) FROM Streak inner2 WHERE inner2.userId = :userId)
                 WHERE s.userId = :userId
+                GROUP BY currentS.id, longestS.id
             """)
-    Optional<StreakAnalytics> findAnalyticsByUserId(@Param("userId") int userId);
+    Optional<StreakAnalytics> findAnalyticsByUserId(int userId);
 
 
 }

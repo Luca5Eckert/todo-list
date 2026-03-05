@@ -29,7 +29,7 @@ public class Streak {
     public void increment() {
         LocalDate today = LocalDate.now();
 
-        if(this.last.equals(today)) {
+        if(this.last != null && this.last.equals(today)) {
             return;
         }
 
