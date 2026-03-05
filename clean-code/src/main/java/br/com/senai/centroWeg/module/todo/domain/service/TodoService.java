@@ -2,6 +2,7 @@ package br.com.senai.centroWeg.module.todo.domain.service;
 
 import br.com.senai.centroWeg.module.todo.domain.command.TodoCreateCommand;
 import br.com.senai.centroWeg.module.todo.domain.command.UpdateTodoCommand;
+import br.com.senai.centroWeg.module.todo.domain.exception.TodoException;
 import br.com.senai.centroWeg.module.todo.domain.exception.TodoNotFoundException;
 import br.com.senai.centroWeg.module.todo.domain.model.Todo;
 import br.com.senai.centroWeg.module.todo.domain.port.StreakUpdater;
@@ -26,7 +27,7 @@ public class TodoService {
     public Todo create (TodoCreateCommand command){
 
         if(todoRepository.existsByTitle(command.title())){
-            throw new RuntimeException("Already exists a todo with this title");
+            throw new TodoException("Already exists a todo with this title");
         }
 
         Todo todo = new Todo(
@@ -42,7 +43,7 @@ public class TodoService {
 
     public void update(UpdateTodoCommand command){
         Todo todo = todoRepository.findById(command.todoId())
-                .orElseThrow(() -> new RuntimeException("Todo not found"));
+                .orElseThrow(() -> new TodoException("Todo not found"));
 
         todo.changeStatus(command.status());
         todoRepository.save(todo);

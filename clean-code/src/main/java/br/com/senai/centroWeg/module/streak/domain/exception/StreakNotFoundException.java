@@ -1,6 +1,6 @@
 package br.com.senai.centroWeg.module.streak.domain.exception;
 
-public class StreakNotFoundException extends RuntimeException {
+public class StreakNotFoundException extends StreakException {
     public StreakNotFoundException(String message) {
         super(message);
     }
