@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 public class StreakMapper {
 
     public StreakResponse toResponse(Streak streak) {
+        if (streak == null) {
+            return null;
+        }
         return new StreakResponse(
                 streak.getId(),
                 streak.getUserId(),
@@ -20,6 +23,9 @@ public class StreakMapper {
     }
 
     public StreakAnalyticsResponse toAnalyticsResponse(StreakAnalytics analytics) {
+        if (analytics == null) {
+            return null;
+        }
         var currentStreakResponse = toResponse(analytics.getCurrentStreak());
         var longestStreakResponse = toResponse(analytics.getLongestStreak());
 

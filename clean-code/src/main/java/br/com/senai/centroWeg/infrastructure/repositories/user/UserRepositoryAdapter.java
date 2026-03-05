@@ -9,26 +9,36 @@ import java.util.Optional;
 
 @Repository
 public class UserRepositoryAdapter implements UserRepository {
+    
+    private final JpaUserRepository jpaUserRepository;
+
+    public UserRepositoryAdapter(JpaUserRepository jpaUserRepository) {
+        this.jpaUserRepository = jpaUserRepository;
+    }
+
     @Override
-    public User save(User todo) {
-        return null;
+    public User save(User user) {
+        return jpaUserRepository.save(user);
     }
 
     @Override
     public List<User> findAll() {
-        return List.of();
+        return jpaUserRepository.findAll();
     }
 
     @Override
-    public Optional<User> findById(int Id) {
-        return null;
+    public Optional<User> findById(int id) {
+        return jpaUserRepository.findById(id);
     }
 
     @Override
-    public User save(int id, User user){
-        return null;
+    public User save(int id, User user) {
+        user.setId(id);
+        return jpaUserRepository.save(user);
     }
 
     @Override
-    public void delete(int id){}
+    public void delete(int id) {
+        jpaUserRepository.deleteById(id);
+    }
 }

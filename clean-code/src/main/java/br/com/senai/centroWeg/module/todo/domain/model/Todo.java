@@ -2,12 +2,21 @@ package br.com.senai.centroWeg.module.todo.domain.model;
 
 import br.com.senai.centroWeg.module.todo.domain.exception.TodoAlreadyCompletedException;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Table(name = "todos")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Todo {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
@@ -19,6 +28,7 @@ public class Todo {
     @Column
     private int authorId;
 
+    @Enumerated(EnumType.STRING)
     @Column
     private StatusTodo statusTodo;
 
@@ -27,54 +37,6 @@ public class Todo {
         this.description = description;
         this.authorId = authorId;
         this.statusTodo = statusTodo;
-    }
-
-    public Todo(int id, String title, String description, int authorId, StatusTodo statusTodo) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.authorId = authorId;
-        this.statusTodo = statusTodo;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
-    }
-
-    public StatusTodo getStatusTodo() {
-        return statusTodo;
-    }
-
-    public void setStatusTodo(StatusTodo statusTodo) {
-        this.statusTodo = statusTodo;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void changeStatus(StatusTodo status) {

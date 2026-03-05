@@ -64,7 +64,7 @@ public class TodoService {
         return todoRepository.findAllByUserId(query.userId());
     }
 
-    public void deleteById(GetTodoByUserQuery query) {
-        todoRepository.deleteById(query.userId());
+    public void deleteById(int id) {
+        todoRepository.deleteById(id);
     }
 }

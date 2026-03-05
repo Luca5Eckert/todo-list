@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 public class UserMapper {
 
     public UserResponse toResponse(User user) {
+        if (user == null) {
+            return null;
+        }
         return new UserResponse(
                 user.getId(),
                 user.getName(),
@@ -17,6 +20,9 @@ public class UserMapper {
     }
 
     public User toEntity(UserCreateRequest userCreateRequest){
+        if (userCreateRequest == null) {
+            return null;
+        }
         return new User(
                 userCreateRequest.name(),
                 userCreateRequest.email()

@@ -7,6 +7,7 @@ import br.com.senai.centroWeg.module.user.domain.command.UserCreateCommand;
 import br.com.senai.centroWeg.module.user.domain.command.UserUpdateCommand;
 import br.com.senai.centroWeg.module.user.domain.model.User;
 import br.com.senai.centroWeg.module.user.domain.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> create(@RequestBody UserCreateRequest request) {
+    public ResponseEntity<UserResponse> create(@RequestBody @Valid UserCreateRequest request) {
         var command = UserCreateCommand.of(request);
 
         var user = service.create(command);
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> findById(@PathVariable int id) {
+    public ResponseEntity<UserResponse> findById(@PathVariable("id") int id) {
 
         var user = service.findById(id);
 
@@ -60,8 +61,8 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(
-            @PathVariable int id,
-            @RequestBody UserCreateRequest user
+            @PathVariable("id") int id,
+            @RequestBody @Valid UserCreateRequest user
     ){
         var command = UserUpdateCommand.of(id,user);
 
@@ -71,7 +72,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable int id){
+    public ResponseEntity<Void> delete(@PathVariable("id") int id){
 
         service.deleteUser(id);
 
