@@ -4,6 +4,7 @@ import br.com.senai.centroWeg.module.streak.domain.model.Streak;
 import br.com.senai.centroWeg.module.streak.domain.model.StreakAnalytics;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -19,13 +20,19 @@ public interface JpaStreakRepository extends JpaRepository<Streak, Integer> {
     Optional<Streak> findActiveByUserId(int userId, LocalDate yesterday);
 
     @Query("""
-        SELECT
-            (SELECT AVG(s.days) FROM Streak s WHERE s.userId = :userId) as averageDaysStreak,
-            (SELECT s1 FROM Streak s1 WHERE s1.userId = :userId ORDER BY s1.last DESC LIMIT 1) as currentStreak,
-            (SELECT s2 FROM Streak s2 WHERE s2.userId = :userId ORDER BY s2.days DESC LIMIT 1) as longestStreak
-        FROM Streak s_root WHERE s_root.userId = :userId
-        GROUP BY s_root.userId
-    """)
-    Optional<StreakAnalytics> findAnalyticsByUserId(int userId);
+                SELECT new br.com.senai.centroWeg.module.streak.domain.model.StreakAnalytics(
+                    AVG(s.days),
+                    (SELECT s_curr FROM Streak s_curr 
+                     WHERE s_curr.userId = :userId 
+                     ORDER BY s_curr.last DESC, s_curr.id DESC LIMIT 1),
+                    (SELECT s_long FROM Streak s_long 
+                     WHERE s_long.userId = :userId 
+                     ORDER BY s_long.days DESC, s_long.id DESC LIMIT 1)
+                )
+                FROM Streak s
+                WHERE s.userId = :userId
+            """)
+    Optional<StreakAnalytics> findAnalyticsByUserId(@Param("userId") int userId);
+
 
 }
