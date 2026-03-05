@@ -26,11 +26,11 @@ public class StreakMapper {
         if (analytics == null) {
             return null;
         }
-        var currentStreakResponse = toResponse(analytics.getCurrentStreak());
-        var longestStreakResponse = toResponse(analytics.getLongestStreak());
+        var currentStreakResponse = toResponse(analytics.currentStreak());
+        var longestStreakResponse = toResponse(analytics.longestStreak());
 
         return new StreakAnalyticsResponse(
-                analytics.getAverageDaysStreak(),
+                analytics.averageDaysStreak(),
                 currentStreakResponse,
                 longestStreakResponse
         );
