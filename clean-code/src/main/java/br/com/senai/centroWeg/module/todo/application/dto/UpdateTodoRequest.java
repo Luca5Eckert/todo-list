@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Positive;
 public record UpdateTodoRequest(
         @NotNull(message = "Status is required")
         StatusTodo statusTodo,
-        
         @Positive(message = "User ID must be positive")
         int userId
 ) {
